@@ -204,9 +204,22 @@ class HighchartsChart extends Widget
         $returnValues = array(
             'chart' => array(
                 'type' => $this->getType(),
+                'backgroundColor' => "transparent",
+                'color' => '#eee',
+            ),
+            'colors' => array(
+                "#3eb4f9",
+                "#e5c852",
+                "#e5c852",
+                "#52e5d4",
             ),
             'title' => array(
                 'text' => $this->getTitle(),
+                'style' => [
+                    'color' => '#eee',
+                    'textTransform' => 'uppercase',
+                    'font' => '20px aktiv-grotesk, Arial, sans-serif, FontAwesome',
+                ],
             ),
             'subtitle' => array(
                 'text' => $this->getSubtitle(),
@@ -228,6 +241,23 @@ class HighchartsChart extends Widget
         if ($this->getYAxisTitle()) {
             $returnValues['yAxis']['title']['text'] = $this->getYAxisTitle();
         }
+
+        $returnValues['yAxis']['gridLineColor'] = '#444';
+        $returnValues['yAxis']['title']['style']['color'] = '#eee';
+
+        $returnValues['xAxis']['lineColor'] = '#444';
+        $returnValues['xAxis']['tickColor'] = '#444';
+        $returnValues['xAxis']['labels'] = [
+            'style' => [
+                'color' => '#eee',
+                'font' => '16px aktiv-grotesk, Arial, sans-serif, FontAwesome',
+            ],
+        ];
+
+        $returnValues['legend']['itemStyle'] = [
+            'color' => '#eee',
+            'font' => '16px aktiv-grotesk, Arial, sans-serif, FontAwesome',
+        ];
 
         $returnValues['plotOptions'] = array(
             'line' => array(
@@ -252,7 +282,7 @@ class HighchartsChart extends Widget
             $returnValues['series'][] = array(
                 'name' => (isset($serieValues['name']) && $serieValues['name']) ? $serieValues['name'] : $serieName,
                 'data' => (isset($serieValues['data']) && $serieValues['data']) ? $serieValues['data'] : $serieValues,
-                'type' => (isset($serieValues['type']) && $serieValues['type']) ? $serieValues['type'] : 'line',
+                //'type' => (isset($serieValues['type']) && $serieValues['type']) ? $serieValues['type'] : 'line',
             );
         }
 
