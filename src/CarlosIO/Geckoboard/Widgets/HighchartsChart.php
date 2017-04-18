@@ -1,28 +1,18 @@
 <?php
-
 namespace CarlosIO\Geckoboard\Widgets;
-
 /**
  * Class LineChart.
  */
 class HighchartsChart extends Widget
 {
     protected $type;
-
     protected $title;
-
     protected $subtitle;
-
     protected $series = array();
-
     protected $xAxisTitle;
-
     protected $xAxisLabels = array();
-
     protected $yAxisTitle;
-
     protected $yAxisLabels = array();
-
     /**
      * @return array
      */
@@ -30,7 +20,6 @@ class HighchartsChart extends Widget
     {
         return $this->series;
     }
-
     /**
      * @param array $series
      *
@@ -39,10 +28,8 @@ class HighchartsChart extends Widget
     public function setSeries($series)
     {
         $this->series = $series;
-
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -50,7 +37,6 @@ class HighchartsChart extends Widget
     {
         return $this->subtitle;
     }
-
     /**
      * @param mixed $subtitle
      *
@@ -59,10 +45,8 @@ class HighchartsChart extends Widget
     public function setSubtitle($subtitle)
     {
         $this->subtitle = $subtitle;
-
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -70,7 +54,6 @@ class HighchartsChart extends Widget
     {
         return $this->title;
     }
-
     /**
      * @param mixed $title
      *
@@ -79,10 +62,8 @@ class HighchartsChart extends Widget
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -90,7 +71,6 @@ class HighchartsChart extends Widget
     {
         return $this->type;
     }
-
     /**
      * @param mixed $type
      *
@@ -99,10 +79,8 @@ class HighchartsChart extends Widget
     public function setType($type)
     {
         $this->type = $type;
-
         return $this;
     }
-
     /**
      * @return array
      */
@@ -110,7 +88,6 @@ class HighchartsChart extends Widget
     {
         return $this->xAxisLabels;
     }
-
     /**
      * @param array $xAxisLabels
      *
@@ -119,10 +96,8 @@ class HighchartsChart extends Widget
     public function setXAxisLabels($xAxisLabels)
     {
         $this->xAxisLabels = $xAxisLabels;
-
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -130,7 +105,6 @@ class HighchartsChart extends Widget
     {
         return $this->xAxisTitle;
     }
-
     /**
      * @param mixed $xAxisTitle
      *
@@ -139,10 +113,8 @@ class HighchartsChart extends Widget
     public function setXAxisTitle($xAxisTitle)
     {
         $this->xAxisTitle = $xAxisTitle;
-
         return $this;
     }
-
     /**
      * @return array
      */
@@ -150,7 +122,6 @@ class HighchartsChart extends Widget
     {
         return $this->yAxisLabels;
     }
-
     /**
      * @param array $yAxisLabels
      *
@@ -159,10 +130,8 @@ class HighchartsChart extends Widget
     public function setYAxisLabels($yAxisLabels)
     {
         $this->yAxisLabels = $yAxisLabels;
-
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -170,7 +139,6 @@ class HighchartsChart extends Widget
     {
         return $this->yAxisTitle;
     }
-
     /**
      * @param mixed $yAxisTitle
      *
@@ -179,15 +147,12 @@ class HighchartsChart extends Widget
     public function setYAxisTitle($yAxisTitle)
     {
         $this->yAxisTitle = $yAxisTitle;
-
         return $this;
     }
-
     public function setSingleSerie($serieName, $serie)
     {
         $this->series[$serieName] = $serie;
     }
-
     public function addItemSerie($serieName, $item)
     {
         if (!isset($this->series[$serieName])) {
@@ -195,7 +160,6 @@ class HighchartsChart extends Widget
         }
         $this->series[$serieName][] = $item;
     }
-
     /**
      * {@inheritdoc}
      */
@@ -204,61 +168,26 @@ class HighchartsChart extends Widget
         $returnValues = array(
             'chart' => array(
                 'type' => $this->getType(),
-                'backgroundColor' => "transparent",
-                'color' => '#eee',
-            ),
-            'colors' => array(
-                "#3eb4f9",
-                "#e5c852",
-                "#e5c852",
-                "#52e5d4",
             ),
             'title' => array(
                 'text' => $this->getTitle(),
-                'style' => [
-                    'color' => '#eee',
-                    'textTransform' => 'uppercase',
-                    'font' => '20px aktiv-grotesk, Arial, sans-serif, FontAwesome',
-                ],
             ),
             'subtitle' => array(
                 'text' => $this->getSubtitle(),
             ),
         );
-
         if ($this->getXAxisLabels()) {
             $returnValues['xAxis']['categories'] = $this->getXAxisLabels();
         }
-
         if ($this->getYAxisLabels()) {
             $returnValues['yAxis']['categories'] = $this->getYAxisLabels();
         }
-
         if ($this->getXAxisTitle()) {
             $returnValues['xAxis']['title']['text'] = $this->getXAxisTitle();
         }
-
         if ($this->getYAxisTitle()) {
             $returnValues['yAxis']['title']['text'] = $this->getYAxisTitle();
         }
-
-        $returnValues['yAxis']['gridLineColor'] = '#444';
-        $returnValues['yAxis']['title']['style']['color'] = '#eee';
-
-        $returnValues['xAxis']['lineColor'] = '#444';
-        $returnValues['xAxis']['tickColor'] = '#444';
-        $returnValues['xAxis']['labels'] = [
-            'style' => [
-                'color' => '#eee',
-                'font' => '16px aktiv-grotesk, Arial, sans-serif, FontAwesome',
-            ],
-        ];
-
-        $returnValues['legend']['itemStyle'] = [
-            'color' => '#eee',
-            'font' => '16px aktiv-grotesk, Arial, sans-serif, FontAwesome',
-        ];
-
         $returnValues['plotOptions'] = array(
             'line' => array(
                 'dataLabels' => array(
@@ -267,10 +196,8 @@ class HighchartsChart extends Widget
                 'enableMouseTracking' => false,
             ),
         );
-
         return array('highchart' => $this->addSeriesData($returnValues));
     }
-
     /**
      * @param $returnValues
      *
@@ -282,10 +209,9 @@ class HighchartsChart extends Widget
             $returnValues['series'][] = array(
                 'name' => (isset($serieValues['name']) && $serieValues['name']) ? $serieValues['name'] : $serieName,
                 'data' => (isset($serieValues['data']) && $serieValues['data']) ? $serieValues['data'] : $serieValues,
-                //'type' => (isset($serieValues['type']) && $serieValues['type']) ? $serieValues['type'] : 'line',
+                'type' => (isset($serieValues['type']) && $serieValues['type']) ? $serieValues['type'] : 'line',
             );
         }
-
         return $returnValues;
     }
 }
